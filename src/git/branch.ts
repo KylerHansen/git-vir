@@ -16,7 +16,7 @@ export async function getCurrentBranchName(git: SimpleGit): Promise<string | und
 
 /** Force push the current branch. */
 export async function forcePush(git: SimpleGit): Promise<void> {
-    log.faint('> git push --force-with-lease');
+    log.info('> git push --force-with-lease');
     await verifyFromUser();
     await git.push([
         '--force-with-lease',
@@ -26,7 +26,6 @@ export async function forcePush(git: SimpleGit): Promise<void> {
 /** Checkout a new branch locally. Does not fetch the branch from the remote. */
 export async function checkout(git: SimpleGit, branchName: string): Promise<void> {
     log.faint(`> git checkout ${branchName}`);
-    await verifyFromUser();
     await git.raw([
         'checkout',
         branchName,
@@ -45,7 +44,6 @@ export async function fetchBranch(
     },
 ): Promise<void> {
     log.faint(`> git fetch ${remoteName} ${branchName}`);
-    await verifyFromUser();
     await git.fetch(remoteName, branchName);
 }
 
@@ -69,7 +67,7 @@ export async function rebaseOnto(
     git: SimpleGit,
     {oldSha, newSha}: {oldSha: string; newSha: string},
 ): Promise<void> {
-    log.faint(`> git rebase --onto ${newSha} ${oldSha}`);
+    log.info(`> git rebase --onto ${newSha} ${oldSha}`);
     await verifyFromUser();
     await git.rebase([
         '--onto',

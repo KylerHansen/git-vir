@@ -5,7 +5,9 @@ import {askQuestion} from '@augment-vir/node-js';
  * (by throwing an error).
  */
 export async function verifyFromUser() {
-    const response = (await askQuestion('Continue? (y/n)')).trim().toLowerCase()[0];
+    const response = (await askQuestion('Should the above command be executed? (y/n)'))
+        .trim()
+        .toLowerCase()[0];
     if (response === 'y') {
         return;
     } else {
