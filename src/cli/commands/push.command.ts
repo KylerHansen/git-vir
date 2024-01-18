@@ -10,7 +10,6 @@ import {
     rebaseOnto,
 } from '../../git/branch';
 import {PullRequest, listOpenPullRequests} from '../../github-api/pull-request';
-import {verifyFromUser} from '../../util/verify-from-user';
 import {CommandInputs} from '../command-inputs';
 
 /** Perform the git-vir push command. */
@@ -31,10 +30,10 @@ export async function pushCommand({cwd, git, remoteName}: CommandInputs): Promis
         log.info(
             `No pull request found for branch '${currentBranchName}'. Performing a force push only.`,
         );
-        await verifyFromUser();
         await forcePush(git);
         return;
     }
+    await forcePush(git);
 
     log.faint('Started stacked diff update.');
     log.mutate('Do not run any git commands or modify any files.');
