@@ -42,7 +42,7 @@ export function extractArgs(rawArgs: ReadonlyArray<string>): CliInput {
     const [
         command,
         remoteName,
-    ] = extractRelevantArgs({rawArgs, binName: 'gvir', fileName: __filename});
+    ] = extractRelevantArgs({rawArgs, binName: 'git-vir', fileName: __filename});
 
     if (!isEnumValue(command, GitVirCommandName)) {
         throw new Error(

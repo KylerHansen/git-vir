@@ -1,7 +1,7 @@
 import {CommandInputs} from './command-inputs';
 import {pushCommand} from './commands/push.command';
 
-/** Available git-vir command names. To be used as the first argument to the gvir command. */
+/** Available git-vir command names. To be used as the first argument to the git-vir command. */
 export enum GitVirCommandName {
     Push = 'push',
 }
