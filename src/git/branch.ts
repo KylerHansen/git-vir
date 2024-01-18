@@ -16,11 +16,10 @@ export async function getCurrentBranchName(git: SimpleGit): Promise<string | und
 
 /** Force push the current branch. */
 export async function forcePush(git: SimpleGit): Promise<void> {
-    log.faint('> git push --force --with-lease');
+    log.faint('> git push --force-with-lease');
     await verifyFromUser();
     await git.push([
-        '--force',
-        '--with-lease',
+        '--force-with-lease',
     ]);
 }
 
