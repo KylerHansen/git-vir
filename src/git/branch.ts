@@ -16,7 +16,7 @@ export async function getCurrentBranchName(git: SimpleGit): Promise<string | und
 
 /** Force push the current branch. */
 export async function forcePush(git: SimpleGit): Promise<void> {
-    log.info('> git push --force-with-lease');
+    log.bold('> git push --force-with-lease');
     await verifyFromUser();
     await git.push([
         '--force-with-lease',
@@ -67,7 +67,7 @@ export async function rebaseOnto(
     git: SimpleGit,
     {oldSha, newSha}: {oldSha: string; newSha: string},
 ): Promise<void> {
-    log.info(`> git rebase --onto ${newSha} ${oldSha}`);
+    log.bold(`> git rebase --onto ${newSha} ${oldSha}`);
     await verifyFromUser();
     await git.rebase([
         '--onto',

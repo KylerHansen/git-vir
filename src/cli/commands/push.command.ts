@@ -14,31 +14,35 @@ import {CommandInputs} from '../command-inputs';
 
 /** Perform the git-vir push command. */
 export async function pushCommand({cwd, git, remoteName}: CommandInputs): Promise<void> {
-    const currentBranchName = await getCurrentBranchName(git);
+    const originalBranchName = await getCurrentBranchName(git);
 
-    if (!currentBranchName) {
+    if (!originalBranchName) {
         throw new Error('Cannot push: you are currently not on a branch.');
     }
 
     const openPullRequests = await listOpenPullRequests(cwd);
 
     const currentPullRequest: Readonly<PullRequest> | undefined = openPullRequests.find(
-        (pullRequest) => pullRequest.headRefName === currentBranchName,
+        (pullRequest) => pullRequest.headRefName === originalBranchName,
     );
 
     if (!currentPullRequest) {
         log.info(
-            `No pull request found for branch '${currentBranchName}'. Performing a force push only.`,
+            `No pull request found for branch '${originalBranchName}'. Performing a force push only.`,
         );
         await forcePush(git);
         return;
     }
+    log.faint('Pushing current branch...');
     await forcePush(git);
 
     log.faint('Started stacked diff update.');
     log.mutate('Do not run any git commands or modify any files.');
 
     await updateStackedPullRequest(git, openPullRequests, currentPullRequest, remoteName);
+
+    /** Go back to the original branch after it's all done. */
+    await checkout(git, originalBranchName);
 }
 
 async function updateStackedPullRequest(
@@ -72,6 +76,7 @@ async function updateStackedPullRequest(
             oldSha: originalParentSha,
         });
         await forcePush(git);
+        log.success(`${childBranchName} updated.`);
 
         updatedChildCount += await updateStackedPullRequest(
             git,
