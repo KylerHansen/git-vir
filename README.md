@@ -19,8 +19,6 @@ Use this instead of `git push` when you have a chain of several PRs that are tar
 1. Start with the base-most branch (the branch closest to your main dev branch) that needs to be updated.
 2. Make the necessary changes to that branch (rebase, commit amend, etc.).
 3. Run `git-vir push`.
-4. Approve each change as it's listed.
-    - These requests for approval are used to prevent anything catastrophically wrong from happening since this will modify your git history with rebases and force pushes.
-5. Don't do anything else in the repo's directory until the command is finished.
+4. Don't do anything else in the repo's directory until the command is finished.
     - The git-vir command will checkout and push all dependent branches, recursively.
-    - If you do anything with the repo while this is happening, it'll probably break the command and might mess up the git commands as well.
+    - If you do anything with the repo while this is happening, it'll likely break this process, including pushing changes to incorrect branches.

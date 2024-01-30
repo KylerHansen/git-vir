@@ -1,6 +1,5 @@
 import {log} from '@augment-vir/node-js';
 import {SimpleGit} from 'simple-git';
-import {verifyFromUser} from '../util/verify-from-user';
 
 /** Get the current branch name. */
 export async function getCurrentBranchName(git: SimpleGit): Promise<string | undefined> {
@@ -17,7 +16,6 @@ export async function getCurrentBranchName(git: SimpleGit): Promise<string | und
 /** Force push the current branch. */
 export async function forcePush(git: SimpleGit): Promise<void> {
     log.bold('> git push --force-with-lease');
-    await verifyFromUser();
     await git.push([
         '--force-with-lease',
     ]);
@@ -68,7 +66,6 @@ export async function rebaseOnto(
     {oldSha, newSha}: {oldSha: string; newSha: string},
 ): Promise<void> {
     log.bold(`> git rebase --onto ${newSha} ${oldSha}`);
-    await verifyFromUser();
     await git.rebase([
         '--onto',
         newSha,
