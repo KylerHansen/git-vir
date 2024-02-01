@@ -37,7 +37,6 @@
         "@augment-vir/node-js": "^22.4.0",
         "cli-args-vir": "^0.0.2",
         "object-shape-tester": "^1.0.3",
-        "octokit": "^3.1.2",
         "simple-git": "^3.22.0"
     },
     "devDependencies": {
