@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 import {loadTestCwd} from '../test-cwd.test-helper';
-import {listOpenPullRequests} from './pull-request';
+import {listOpenPullRequests} from './pull-request-data';
 
 describe(listOpenPullRequests.name, () => {
     it('gets pull requests', async () => {

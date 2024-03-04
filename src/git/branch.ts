@@ -63,12 +63,12 @@ export async function doesBranchExistLocally(git: SimpleGit, branchName: string)
 /** Perform a `git rebase --onto` command. */
 export async function rebaseOnto(
     git: SimpleGit,
-    {oldSha, newSha}: {oldSha: string; newSha: string},
+    {oldRef, newRef}: {oldRef: string; newRef: string},
 ): Promise<void> {
-    log.bold(`> git rebase --onto ${newSha} ${oldSha}`);
+    log.bold(`> git rebase --onto ${newRef} ${oldRef}`);
     await git.rebase([
         '--onto',
-        newSha,
-        oldSha,
+        newRef,
+        oldRef,
     ]);
 }
