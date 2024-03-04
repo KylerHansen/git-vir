@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "outDir": "./dist",
-        "rootDir": "./src",
+        "rootDir": "./src"
     },
     "exclude": [
         "./configs",
@@ -10,7 +10,7 @@
         "./dist-*",
         "./node_modules",
         "./test-files",
-        "./ts.out",
+        "./ts.out"
     ],
-    "extends": "virmator/base-configs/tsconfig.base.json",
+    "extends": "virmator/base-configs/tsconfig.base.json"
 }
